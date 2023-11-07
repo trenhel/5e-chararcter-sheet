@@ -14,7 +14,7 @@ body{
 }
 
 .charSheet{
-    height: 1650px;
+    height: 1875px;
     width: 1275px;
     display: grid;
     grid-template-rows: 1fr 8fr;
