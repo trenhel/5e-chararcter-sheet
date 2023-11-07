@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D 5e Character Sheet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yatra+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <form>
+        <label for="chooseClass">
+            CLASS
+        <select name="chooseClass" id="chooseClass" onchange="addSaves()">
+            <option value="choose">Select One</option>
+            <option value="Artificer">Artificer</option>
+            <option value="Barbarian">Barbarian</option>
+            <option value="Bard">Bard</option>
+            <option value="Cleric">Cleric</option>
+            <option value="Druid">Druid</option>
+            <option value="Fighter">Fighter</option>
+            <option value="Monk">Monk</option>
+            <option value="Paladin">Paladin</option>
+            <option value="Ranger">Ranger</option>
+            <option value="Rogue">Rogue</option>
+            <option value="Sorcerer">Sorcerer</option>
+            <option value="Warlock">Warlock</option>
+            <option value="Wizard">Wizard</option>
+        </select>
+        </label>
+    </form>
+    <div class="charSheet">
+        <div class="header">
+            <div class="name"></div>
+            <div class="info"></div>
+        </div>
+        <div class="main">
+            <div class="column column1">
+                <div class="stats">
+
+                    <div class="statBlock">
+                        <div class="statName">STRENGTH</div>
+                        <div class="statNum" id="strengthNumber" onclick="changeNumber(strengthNumber, strengthNumberInput)">-</div>
+                        <input type="number" class="numberInput" id="strengthNumberInput" min="3" max="18" onkeydown="">
+                        <div class="statMod">-</div>
+                    </div>
+
+                    <div class="statBlock">
+                        <div class="statName">DEXTERITY</div>
+                        <div class="statNum" id="dexterityNumber" onclick="changeNumber(dexterityNumber, dexterityNumberInput)">-</div>
+                        <input type="number" class="numberInput" id="dexterityNumberInput" min="3" max="18" onkeydown="">
+                        <div class="statMod">-</div>
+                    </div>
+
+                    <div class="statBlock">
+                        <div class="statName">CONSTITUTION</div>
+                        <div class="statNum" id="constitutionNumber" onclick="changeNumber(constitutionNumber, constitutionNumberInput)">-</div>
+                        <input type="number" class="numberInput" id="constitutionNumberInput" min="3" max="18" onkeydown="">
+                        <div class="statMod">-</div>
+                    </div>
+
+                    <div class="statBlock">
+                        <div class="statName">INTELLIGENCE</div>
+                        <div class="statNum" id="intelligenceNumber" onclick="changeNumber(intelligenceNumber, intelligenceNumberInput)">-</div>
+                        <input type="number" class="numberInput" id="intelligenceNumberInput" min="3" max="18" onkeydown="">
+                        <div class="statMod">-</div>
+                    </div>
+
+                    <div class="statBlock">
+                        <div class="statName">WISDOM</div>
+                        <div class="statNum" id="wisdomNumber" onclick="changeNumber(wisdomNumber, wisdomNumberInput)">-</div>
+                        <input type="number" class="numberInput" id="wisdomNumberInput" min="3" max="18" onkeydown="">
+                        <div class="statMod">-</div>
+                    </div>
+
+                    <div class="statBlock">
+                        <div class="statName">CHARISMA</div>
+                        <div class="statNum" id="charismaNumber" onclick="changeNumber(charismaNumber, charismaNumberInput)">-</div>
+                        <input type="number" class="numberInput" id="charismaNumberInput" min="3" max="18" onkeydown="">
+                        <div class="statMod">-</div>
+                    </div>
+
+                </div>
+                <div class="inspiration"></div>
+                <div class="proficiency"></div>
+                <div class="savingThrows">
+                    <div class="saveLine">
+                        <div class="dot saveDot saveItem"></div>
+                        <div class="num saveNum saveItem">-</div>
+                        <div class="save strSave saveItem" onclick="check()">Strength</div>
+                    </div>
+                    <div class="saveLine">
+                        <div class="dot saveDot saveItem"></div>
+                        <div class="num saveNum saveItem">-</div>
+                        <div class="save strSave saveItem">Dexterity</div>
+                    </div>
+                    <div class="saveLine">
+                        <div class="dot saveDot saveItem"></div>
+                        <div class="num saveNum saveItem">-</div>
+                        <div class="save strSave saveItem">Constitution</div>
+                    </div>
+                    <div class="saveLine">
+                        <div class="dot saveDot saveItem"></div>
+                        <div class="num saveNum saveItem">-</div>
+                        <div class="save strSave saveItem">Intelligence</div>
+                    </div>
+                    <div class="saveLine">
+                        <div class="dot saveDot saveItem"></div>
+                        <div class="num saveNum saveItem">-</div>
+                        <div class="save strSave saveItem">Wisdom</div>
+                    </div>
+                    <div class="saveLine">
+                        <div class="dot saveDot saveItem"></div>
+                        <div class="num saveNum saveItem">-</div>
+                        <div class="save strSave saveItem">Charisma</div>
+                    </div>
+                    <div class="titleBlock">
+                        <div class="title">SAVING THROWS</div>
+                    </div>
+                </div>
+                <div class="skills">
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Acrobatics<div class="skillStat">&nbsp;(Dex)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Animal Handling<div class="skillStat">&nbsp;(Wis)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Arcana<div class="skillStat">&nbsp;(Int)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Athletics<div class="skillStat">&nbsp;(Str)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Deception<div class="skillStat">&nbsp;(Cha)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">History<div class="skillStat">&nbsp;(Int)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Insight<div class="skillStat">&nbsp;(Wis)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Intimidation<div class="skillStat">&nbsp;(Cha)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Investigation<div class="skillStat">&nbsp;(Int)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Medicine<div class="skillStat">&nbsp;(Wis)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Nature<div class="skillStat">&nbsp;(Int)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Perception<div class="skillStat">&nbsp;(Wis)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Performance<div class="skillStat">&nbsp;(Cha)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Persuasion<div class="skillStat">&nbsp;(Cha)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Religion<div class="skillStat">&nbsp;(Int)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Sleight of Hand<div class="skillStat">&nbsp;(Dex)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Stealth<div class="skillStat">&nbsp;(Dex)</div></div>
+                    </div>
+                    <div class="skillsLine">
+                        <div class="dot skillsDod skillsItem"></div>
+                        <div class="num skillsNum skillsItem">-</div>
+                        <div class="skill skillsItem">Survival<div class="skillStat">&nbsp;(Wis)</div></div>
+                    </div>         
+                    <div class="titleBlock">
+                        <div class="title">SKILLS</div>
+                    </div>
+                </div>
+                <div class="passivePerception"></div>
+                <div class="proficienciesAndLanguages"></div>
+            </div>
+            <div class="column column2">
+                <div class="armorClass"></div>
+                <div class="initiative"></div>
+                <div class="speed"></div>
+                <div class="HP"></div>
+                <div class="hitDice"></div>
+                <div class="deathSaves"></div>
+                <div class="attacks"></div>
+                <div class="equipment"></div>
+            </div>
+            <div class="column column3">
+                <div class="features"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 6px;
+    font-family: 'Prompt', sans;
+    --fill: gray;
+    --border: outset 2px black;
+    --base: white;
+}
+
+body{
+    background-color: var(--base);
+}
+
+.charSheet{
+    height: 1650px;
+    width: 1275px;
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    padding: 4rem;
+    gap: 3rem;
+    margin: 0 auto;
+    overflow: hidden;
+    border: var(--border);
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name{
+    width: 40%;
+    height: 5rem;
+    border: var(--border);
+    border-radius: 6px 0 0 6px;
+    border-right: none;
+}
+
+.info{
+    width: 60%;
+    height: 9rem;
+    border: var(--border);
+}
+
+.main{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.column1{
+    display: grid;
+    grid-template-columns: .95fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 3fr 7fr 1fr 4fr;
+    gap: 1rem
+}
+
+.stats{
+    grid-column: 1/2;
+    grid-row: 1/5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.statBlock{
+    border: var(--border);
+    height: 115px;
+    text-align: center;
+}
+
+.statName{
+    font-weight: bolder;
+    font-size: 13px;
+}
+
+.statNum{
+    font-size: 2rem;
+    color: var(--fill);
+    font-family: 'Rock salt';
+}
+
+.numberInput {
+    display: none;
+    font-family: 'Rock salt';
+    font-size: 2rem;
+    width: 80%;
+    height: 77px;
+    margin: auto;
+    margin-left: 18px;
+    text-align: center;
+}
+
+.statMod{
+    color: var(--fill);
+    border: var(--border);
+    border-radius: 45%;
+    width: 55%;
+    height: 2.25rem;
+    margin: auto;
+    margin-top: -.25rem;
+    background-color: var(--base);
+    font-size: .9rem;
+    font-family: 'Rock salt';
+}
+
+.inspiration{
+    grid-column: 2/4;
+    grid-row: 1/2;
+}
+
+.proficiency{
+    grid-column: 2/4;
+    grid-row: 2/3;
+}
+
+.savingThrows{
+    grid-column: 2/4;
+    grid-row: 3/4;
+}
+
+.save{
+    font-size: 13px;
+}
+
+.savingThrows, .skills{
+    border: var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: .75rem;
+    padding-bottom: .25rem;
+}
+
+.skills{
+    grid-column: 2/4;
+    grid-row: 4/5;
+}
+
+.skill{
+    display: flex;
+    font-size: 13px;
+}
+
+.skillStat{
+    color: var(--fill);
+    
+}
+
+.passivePerception{
+    grid-column: 1/4;
+    grid-row: 5/6;
+}
+
+.proficienciesAndLanguages{
+    grid-column: 1/4;
+    grid-row: 6/7;
+    border: var(--border);
+}
+
+.column2{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows: 2fr 3fr 2fr 4fr 5fr;
+    gap: 1rem;
+}
+
+.armorClass{
+    grid-column: 1/3;
+    grid-row: 1/2;
+}
+
+.initiative{
+    grid-column: 3/5;
+    grid-row: 1/2;
+}
+
+.speed{
+    grid-column: 5/7;
+    grid-row: 1/2;
+}
+
+.HP{
+    grid-column: 1/7;
+    grid-row: 2/3;
+    border: var(--border);
+}
+
+.hitDice{
+    grid-column: 1/4;
+    grid-row: 3/4;
+    border: var(--border);
+}
+
+.deathSaves{
+    grid-column: 4/7;
+    grid-row: 3/4;
+    border: var(--border);
+}
+
+.attacks{
+    grid-column: 1/7;
+    grid-row: 4/5;
+    border: var(--border);
+}
+
+.equipment{
+    grid-column: 1/7;
+    grid-row: 5/6;
+    border: var(--border);
+}
+
+.column3{
+    border: var(--border);
+}
+
+.dot{
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    border: solid 1px black;
+    margin-bottom: 3px;
+}
+
+.num{
+    border-bottom: solid 1px black;
+    border-radius: 0;
+    width: 2rem;
+    text-align: center;
+    font-size: .8rem;
+    color: var(--fill);
+    font-family: 'Rock salt';
+}
+
+.title{
+    font-weight: bolder;
+    font-size: 13px;
+    margin-top: 1rem;
+
+}
+
+.saveLine, .skillsLine{
+    width: 100%;
+    display: flex;
+    align-items: end;
+}
+
+.saveItem, .skillsItem{
+    margin-right: .5rem
+}
+
+form{
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem
+}
