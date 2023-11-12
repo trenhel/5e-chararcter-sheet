@@ -1,11 +1,12 @@
 /* 
 -- TO DO --
-- fill in raceList
 - fill in backgroundList
 - fill in itemList
 - fill in weaponList
 - fill in armorList
 - if stats are empty, create a rolls list for use in filling stat numbers
+- expand on class list to include abilities
+- expand on race list to include subraces
 */
 
 
@@ -80,24 +81,102 @@ const classList = [
         skills: ['Choose two from', ['Arcana', 'History', 'Insight', 'Investigation', 'Medicine', 'Religion']]
     }
 ];
-const raceList = [];
+const raceList = [
+    {
+        race: `Dragonborn`,
+        abilityScores: {
+            Strength: 2,
+            Charisma: 1
+        },
+        size: `Medium`,
+        speed: 30
+    },
+    {
+        race: `Dwarf`,
+        abilityScores: {
+            Constitution: 2
+        },
+        size: `Medium`,
+        speed: 25
+    },
+    {
+        race: `Elf`,
+        abilityScores: {
+            Dexterity: 2
+        },
+        size: `Medium`,
+        speed: 30
+    },
+    {
+        race: `Gnome`,
+        abilityScores: {
+            Intelligence: 2
+        },
+        size: `Small`,
+        speed: 25
+    },
+    {
+        race: `Half-Elf`,
+        abilityScores: {
+            Charisma: 2,
+            chooseTwoFrom: [`Strength`, `Dexterity`, `Constitution`, `Intelligence`, `Wisdom`]
+        },
+        size: `Medium`,
+        speed: 30
+    },
+    {
+        race: `Half-Orc`,
+        abilityScores: {
+            Strength: 2,
+            Constitution: 1
+        },
+        size: `Medium`,
+        speed: 30
+    },
+    {
+        race: `Halfling`,
+        abilityScores: {
+            Dexterity: 2
+        },
+        size: `Small`,
+        speed: 25
+    },
+    {
+        race: `Human`,
+        abilityScores: `Ability from subrace`,
+        size: `Medium`,
+        speed:30
+    },
+    {
+        race: `Tiefling`,
+        abilityScores: {
+            Intelligence: 1,
+            Charisma: 2
+        },
+        size: `Medium`,
+        speed: 30
+    }
+];
 const backgroundList = [];
 const itemList = [];
 const weaponList = [];
 const armorList = [];
 
-// running searchForKey will return an array of each class's value for the chosen class key argument
-function searchForKey(specificClassKey = `className`) {
+// running searchForKey will return an array of each value for the chosen object key argument
+function searchForKey(list, specificKey) {
     let valueArray = [];
-    for (let classObject of classList) {
-        for (let classObjectkey in classObject) {
-            if (classObjectkey == specificClassKey) {
-                valueArray.push(classObject[classObjectkey]);
+    for (let object of list) {
+        for (let objectKey in object) {
+            if (objectKey == specificKey) {
+                valueArray.push(object[objectKey]);
             }
         }
     }
     return valueArray;
 };
+
+console.log(searchForKey(raceList, `abilityScores`));
+console.log(searchForKey(classList, `className`));
 
 // dice roll function to call
 function rollD(diceNumber = 6) {
@@ -126,7 +205,7 @@ function statRolls() {
 
 
 // BELOW IS A WORKING NUMBER MODIFIER FOR STATS
-// SOME OF THIS CODE WAS TAKEN, POTENTIALLY MODIFIED, BUT NOT REMOVED, FROM THE SECTION BELOW
+// SOME OF THIS CODE WAS TAKEN, POTENTIALLY MODIFIED, BUT NOT REMOVED, FROM THE SECTION FURTHER BELOW
 
 // REWORK FOR TOUCH. MAYBE ADD BUTTON INSTEAD OF ENTER?
 
