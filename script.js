@@ -1,12 +1,14 @@
 /* 
 -- TO DO --
 - fill in backgroundList
+- fill in featList
 - fill in itemList
 - fill in weaponList
 - fill in armorList
 - if stats are empty, create a rolls list for use in filling stat numbers
-- expand on class list to include abilities
-- expand on race list to include subraces
+- expand on class list to include abilities, proficiencies, and equipment
+- expand on race list to include subraces, variants, and abilities
+- change the confirmNumber function to leave a - if input is left empty
 */
 
 
@@ -15,67 +17,67 @@
 
 const classList = [
     {
-        className: `Artificer`,
+        class: `Artificer`,
         hitDice: 8,
         saveThrows: ['Constitution', 'Intelligence'],
         skills: ['Choose two from', ['Arcana','History','Investigation','Medicine','Nature','Perception','Sleight of Hand']]
     }, {
-        className: `Barbarian`,
+        class: `Barbarian`,
         hitDice: 12,
         saveThrows: ['Strength', 'Constitution'],
         skills: ['Choose two from', ['Animal Handling','Athletics','Intimidation','Nature','Perception','Survival']]
     }, {
-        className: `Bard`,
+        class: `Bard`,
         hitDice: 8,
         saveThrows: ['Dexterity', 'Charisma'],
         skills: ['Choose any three']
     }, {
-        className: `Cleric`,
+        class: `Cleric`,
         hitDice: 8,
         saveThrows: ['Wisdom', 'Charisma'],
         skills: ['Choose two from', ['History', 'Insight', 'Medicine', 'Persuasion', 'Religion']]
     }, {
-        className: `Druid`,
+        class: `Druid`,
         hitDice: 8,
         saveThrows: ['Intelligence', 'Wisdom'],
         skills: ['Choose two from', ['Arcana', 'Animal Handling', 'Insight', 'Medicine', 'Nature', 'Perception', 'Religion', 'Survival']]
     }, {
-        className: `Fighter`,
+        class: `Fighter`,
         hitDice: 10,
         saveThrows: ['Strength', 'Constitution'],
         skills: ['Choose two from', ['Acrobatics', 'Animal Handling', 'Athletics','History', 'Insight', 'Intimidation', 'Perception', 'Survival']]
     }, {
-        className: `Monk`,
+        class: `Monk`,
         hitDice: 8,
         saveThrows: ['Strength', 'Dexterity'],
         skills: ['Choose two from', ['Acrobatics', 'Athletics', 'History', 'Insight', 'Religion', 'Stealth']]
     }, {
-        className: `Paladin`,
+        class: `Paladin`,
         hitDice: 10,
         saveThrows: ['Wisdom', 'Charisma'],
         skills: ['Choose two from', ['Athletics', 'Insight', 'Intimidation', 'Medicine', 'Persuasion', 'Religion']]
     }, {
-        className: `Ranger`,
+        class: `Ranger`,
         hitDice: 10,
         saveThrows: ['Strength', 'Dexterity'],
         skills: ['Choose three from', ['Animal Handling', 'Athletics', 'Insight', 'Investigation', 'Nature', 'Perception', 'Stealth', 'Survival']]
     }, {
-        className: `Rogue`,
+        class: `Rogue`,
         hitDice: 8,
         saveThrows: ['Dexterity', 'Intelligence'],
         skills: ['Choose four from', ['Acrobatics', 'Athletics', 'Deception', 'Insight', 'Intimidation', 'Investigation', 'Perception', 'Performance', 'Persuasion', 'Sleight of Hand', 'Stealth']]
     }, {
-        className: `Sorcerer`,
+        class: `Sorcerer`,
         hitDice: 6,
         saveThrows: ['Constitution', 'Charisma'],
         skills: ['Choose two from', ['Arcana', 'Deception', 'Insight', 'Intimidation', 'Persuasion', 'Religion']]
     }, {
-        className: `Warlock`,
+        class: `Warlock`,
         hitDice: 8,
         saveThrows: ['Wisdom', 'Charisma'],
         skills: ['Choose two from', ['Arcana', 'Deception', 'History', 'Intimidation', 'Investigation', 'Nature', 'Religion']]
     }, {
-        className: `Wizard`,
+        class: `Wizard`,
         hitDice: 6,
         saveThrows: ['Intelligence', 'Wisdom'],
         skills: ['Choose two from', ['Arcana', 'History', 'Insight', 'Investigation', 'Medicine', 'Religion']]
@@ -157,12 +159,158 @@ const raceList = [
         speed: 30
     }
 ];
-const backgroundList = [];
+const backgroundList = [
+    {
+        background: `Acolyte`,
+        skillProficiencies: [`Insight`, `Religion`],
+        toolProficiencies: [],
+        languages: `Two of your choice`,
+        equipment: [`A holy symbol`, [`A prayer book`, `A prayer wheel`], `5 sticks of Incense`, `Vestiments`, `A set of common clothes`, `A belt pouch`],
+        startingGold: 15
+    },
+    {
+        background: `Charlatan`,
+        skillProficiencies: [`Deception`, `Sleight of Hand`],
+        toolProficiencies: [`Disguise kit`, `Forgery kit`],
+        languages: [],
+        equipment: [`A set of fine clothes`, `A disguise kit`, [`Tools of the con of your choice`, [`Ten stoppered bottles filled with colored liquid`, `A set of weighted dice`, `A deck of marked cards`, `A signet ring of an imaginary duke`]], `A belt pouch`],
+        startingGold: 15
+    },
+    {
+        background: `Criminal`,
+        skillProficiencies: [`Deception`, `Stealth`],
+        toolProficiencies: [`One type of gaming set`, `Thieves' tools`],
+        languages: [],
+        equipment: [`A crowbar`, `A set of dark common clothes including a hood`, `A belt pouch`],
+        startingGold: 15
+    },
+    {
+        background: `Entertainer`,
+        skillProficiencies: [`Acrobatics`, `Performance`],
+        toolProficiencies: [`Disguise kit`, `One type of musical instrument`],
+        languages: [],
+        equipment: [`A musical instrument (one of your choice)`, [`The favor of an admirer`, [`A love letter`, `A lock of hair`, `A trinket`]], `Costume clothes`, `A belt pouch`],
+        startingGold: 15
+    },
+    {
+        background: `Folk Hero`,
+        skillProficiencies: [`Animal Handling`, `Survival`],
+        toolProficiencies: [`One type of artisan's tools`, `Vehicles (land)`],
+        languages: [],
+        equipment: [`A set of artisan's tools (one of your choice)`, `A shovel`, `An iron pot`, `A set of common clothes`, `A belt pouch`],
+        startingGold: 10
+    },
+    {
+        background: `Gladiator`,
+        skillProficiencies: [`Acrobatics`, `Performance`],
+        toolProficiencies: [`Disguise kit`, `One type of musical instrument`],
+        languages: [],
+        equipment: [`An inexpensive but unususal weapon, such as a trident or net (one of your choice)`, [`The favor of an admirer`[`A love letter`, `A lock of hair`, `A trinket`]], `Costume clothes`, `A belt pouch`],
+        startingGold: 15
+    },
+    {
+        background: `Guild Artisan`,
+        skillProficiencies: [`Insight`, `Persuasion`],
+        toolProficiencies: [`One type of artisan's tools`],
+        languages: [`One of your choice`],
+        equipment: [`A set of artisan's tools (one of your choice)`, `A letter of introduction from your guild`, `A set of traveler's clothes`, `A belt pouch`],
+        startingGold: 15
+    },
+    {
+        background: `Guild Merchant`,
+        skillProficiencies: [`Insight`, `Persuasion`],
+        toolProficiencies: [`Choose one:`, [`One type of artisan's tools`, `One type of navigator's tools`, `One additional Language`]],
+        languages: [`One of your choice`],
+        equipment: [[`Choose one:`, [`A set of artisan's tools`, `A mule and a cart`]], `A letter of introduction from your guild`, `A set of traveler's clothes`, `A belt pouch`],
+        startingGold: 15
+    },
+    {
+        background: `Hermit`,
+        skillProficiencies: [`Medicine`, `Religion`],
+        toolProficiencies: [`Herbalism kit`],
+        languages: [`One of your choice`],
+        equipment: [`A Map or Scroll Case stuffed full of notes from your studies or prayers`, `A winter blanket`, `A set of common clothes`, `A belt pouch`],
+        startingGold: 5
+    },
+    {
+        background: `Knight`,
+        skillProficiencies: [`History`, `Persuasion`],
+        toolProficiencies: [`One type of gaming set`],
+        languages: [`One of your choice`],
+        equipment: [`A set of fine clothes`, `A signet ring`, `A scroll of pedigree`, `A purse`],
+        startingGold: 25
+    },
+    {
+        background: `Noble`,
+        skillProficiencies: [`History`, `Persuasion`],
+        toolProficiencies: [`One type of gaming set`],
+        languages: [`One of your choice`],
+        equipment: [`A set of fine clothes`, `A signet ring`, `A scroll of pedigree`, `A purse`],
+        startingGold: 25
+    },
+    {
+        background: `Outlander`,
+        skillProficiencies: [`Athletics`, `Survival`],
+        toolProficiencies: [`One type of musical instrument`],
+        languages: [`One of your choice`],
+        equipment: [`A staff`, `A hunting trap`, `A trophy from an animal you killed`, `A set of traveler's clothes`, `A belt pouch`],
+        startingGold: 10
+    },
+    {
+        background: `Pirate`,
+        skillProficiencies: [`Athletics`, `Perception`],
+        toolProficiencies: [`Navigator's tools`, `Vehicles (water)`],
+        languages: [],
+        equipment: [`A belaying pin (club)`, `Silk rope (50 feet)`, `A lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5)`, `A set of common clothes`, `A belt pouch`],
+        startingGold: 10
+    },
+    {
+        background: `Sage`,
+        skillProficiencies: [`Arcana`, `History`],
+        toolProficiencies: [],
+        languages: [`Two of your choice`],
+        equipment: [`Ink (1-ounce bottle)`, `A quill`, `A small knife`, `A letter from a dead colleague posing a question you have not yet been able to answer`, `A set of common clothes`, `A belt pouch`],
+        startingGold: 10
+    },
+    {
+        background: `Sailor`,
+        skillProficiencies: [`Athletics`, `Perception`],
+        toolProficiencies: [`Navigator's tools`, `Vehicles (water)`],
+        languages: [],
+        equipment: [`A belaying pin (club)`, `Silk rope (50 feet)`, `A lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5)`, `A set of common clothes`, `A belt pouch`],
+        startingGold: 10
+    },
+    {
+        background: `Soldier`,
+        skillProficiencies: [`Athletics`, `Intimidation`],
+        toolProficiencies: [`One type of gaming set`, `Vehicles (land)`],
+        languages: [],
+        equipment: [`An insignia of rank`, [`A trophy taken from a fallen enemy`, [`A dagger`, `A broken blade`, `A piece of banner`]], [`A bone dice set`, `A playing card set`], `A set of common clothes`, `A belt pouch`],
+        startingGold: 10
+    },
+    {
+        background: `Spy`,
+        skillProficiencies: [`Deception`, `Stealth`],
+        toolProficiencies: [`One type of gaming set`, `Thieves' tools`],
+        languages: [],
+        equipment: [`A crowbar`, `A set of dark common clothes including a hood`, `A belt pouch`],
+        startingGold: 15
+    },
+    {
+        background: `Urchin`,
+        skillProficiencies: [`Sleight of Hand`, `Stealth`],
+        toolProficiencies: [`Disguise kit`, `Thieves' tools`],
+        languages: [],
+        equipment: [`A small knife`, `A map of the city you grew up in`, `A pet mouse`, `A token to remember your parents by`, `A set of common clothes`, `A belt pouch`],
+        startingGold: 10
+    },
+];
+const featList = [];
 const itemList = [];
 const weaponList = [];
 const armorList = [];
 
-// running searchForKey will return an array of each value for the chosen object key argument
+// running searchForKey will return an array of each value for the chosen object key argument in the choses list of objects
 function searchForKey(list, specificKey) {
     let valueArray = [];
     for (let object of list) {
@@ -175,8 +323,7 @@ function searchForKey(list, specificKey) {
     return valueArray;
 };
 
-console.log(searchForKey(raceList, `abilityScores`));
-console.log(searchForKey(classList, `className`));
+console.log(searchForKey(backgroundList, `startingGold`))
 
 // dice roll function to call
 function rollD(diceNumber = 6) {
