@@ -1,6 +1,5 @@
 /* 
 -- TO DO --
-- fill in backgroundList
 - fill in featList
 - fill in itemList
 - fill in weaponList
@@ -9,6 +8,8 @@
 - expand on class list to include abilities, proficiencies, and equipment
 - expand on race list to include subraces, variants, and abilities
 - change the confirmNumber function to leave a - if input is left empty
+- expand on background list to include features
+- change initial function to let user either choose own numbers, take random rolls, or roll random numbers and choose where they go.
 */
 
 
@@ -303,7 +304,7 @@ const backgroundList = [
         languages: [],
         equipment: [`A small knife`, `A map of the city you grew up in`, `A pet mouse`, `A token to remember your parents by`, `A set of common clothes`, `A belt pouch`],
         startingGold: 10
-    },
+    }
 ];
 const featList = [];
 const itemList = [];
@@ -317,13 +318,11 @@ function searchForKey(list, specificKey) {
         for (let objectKey in object) {
             if (objectKey == specificKey) {
                 valueArray.push(object[objectKey]);
-            }
-        }
-    }
+            };
+        };
+    };
     return valueArray;
 };
-
-console.log(searchForKey(backgroundList, `startingGold`))
 
 // dice roll function to call
 function rollD(diceNumber = 6) {
@@ -338,14 +337,17 @@ function statRolls() {
         let addedRoll;
         for (let i = 0; i <= 3; i++) {
             singleStatRollArray.push(rollD());
-        }
+        };
         singleStatRollArray.sort();
         singleStatRollArray.shift();
         addedRoll = singleStatRollArray.reduce((a, b) => a + b);
         statRollsArray.push(addedRoll);
-    }
+    };
     return statRollsArray;
 };
+
+let startingRolls = statRolls();
+
 
 
 
@@ -374,10 +376,18 @@ let statModifiersFromHTML = document.querySelectorAll('.statMod');
 let statNumbersArray = [strengthNumber, dexterityNumber, constitutionNumber, intelligenceNumber, wisdomNumber, charismaNumber];
 let statNumberInputs = [strengthNumberInput, dexterityNumberInput, constitutionNumberInput, intelligenceNumberInput, wisdomNumberInput, charismaNumberInput];
 
-// there may be a better way to implement this instead of using baseStatMods
-let baseStatMods = [strMod, dexMod, conMod, intMod, wisMod, chaMod] = [0, 0, 0, 0, 0, 0];
+// there may be a better way to implement this instead of using baseStatNumbers
+let baseStatNumbers = [strMod, dexMod, conMod, intMod, wisMod, chaMod] = [startingRolls[0], startingRolls[1], startingRolls[2], startingRolls[3], startingRolls[4], startingRolls[5]];
 
-function plusMinus(number) {
+(() => {
+    for (let i = 0; i < startingRolls.length; i++) {
+        console.log(statNumbersFromHTML[i].innerHTML = baseStatNumbers[i]);
+        statModifiersFromHTML[i].innerHTML = Math.floor((statNumbersFromHTML[i].innerHTML - 10) / 2);
+    }
+    addPlusOrMinus(statModifiersFromHTML);
+})();
+
+function addPlusOrMinus(number) {
     for (i = 0; i < number.length; i++) {
         if (Math.sign(number[i].innerHTML) == 1) {
             number[i].innerHTML = `+ ${number[i].innerHTML}`;
@@ -385,29 +395,29 @@ function plusMinus(number) {
             number[i].innerHTML = `- ${number[i].innerHTML * -1}`;
         } else {
             number[i].innerHTML = 0;
-        }
-    }
-}
+        };
+    };
+};
 
-function changeNumber(baseNumber, inputNumber) {
+function changeStatNumber(baseNumber, inputNumber) {
     baseNumber.style.display = `none`;
     inputNumber.style.display = `block`;
     inputNumber.value = Number(baseNumber.innerHTML);
 }
-document.onkeydown = function confirmNumber(event) {
+document.onkeydown = function confirmStatNumber(event) {
     if (event.key == `Enter`) {
         for (let i = 0; i < statNumbersFromHTML.length; i++) {
             if (statNumbersFromHTML[i] == statNumbersArray[i] && statNumbersArray[i].style.display == `none`) {
                 statNumbersArray[i].innerHTML = statNumberInputs[i].value;
                 statNumbersArray[i].style.display = `block`;
                 statNumberInputs[i].style.display = `none`;
-            }
+            };
             statModifiersFromHTML[i].innerHTML = Math.floor((statNumbersFromHTML[i].innerHTML - 10) / 2);
-            baseStatMods[i] = statModifiersFromHTML[i].innerHTML;
-        }
-    }
-    plusMinus(statModifiersFromHTML);
-}
+            baseStatNumbers[i] = statModifiersFromHTML[i].innerHTML;
+        };
+    };
+    addPlusOrMinus(statModifiersFromHTML);
+};
 
 
 
