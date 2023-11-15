@@ -311,6 +311,38 @@ const itemList = [];
 const weaponList = [];
 const armorList = [];
 
+let strengthNumber = document.getElementById(`strengthNumber`);
+let strengthNumberInput = document.getElementById(`strengthNumberInput`);
+let dexterityNumber = document.getElementById(`dexterityNumber`);
+let dexterityNumberInput = document.getElementById(`dexterityNumberInput`);
+let constitutionNumber = document.getElementById(`constitutionNumber`);
+let constitutionNumberInput = document.getElementById(`constitutionNumberInput`);
+let intelligenceNumber = document.getElementById(`intelligenceNumber`);
+let intelligenceNumberInput = document.getElementById(`intelligenceNumberInput`);
+let wisdomNumber = document.getElementById(`wisdomNumber`);
+let wisdomNumberInput = document.getElementById(`wisdomNumberInput`);
+let charismaNumber = document.getElementById(`charismaNumber`);
+let charismaNumberInput = document.getElementById(`charismaNumberInput`);
+
+let statNumbersFromHTML = document.querySelectorAll(`.statNum`);
+let statModifiersFromHTML = document.querySelectorAll('.statMod');
+let statNumbersArray = [strengthNumber, dexterityNumber, constitutionNumber, intelligenceNumber, wisdomNumber, charismaNumber];
+let statNumberInputs = [strengthNumberInput, dexterityNumberInput, constitutionNumberInput, intelligenceNumberInput, wisdomNumberInput, charismaNumberInput];
+
+let startingRolls = statRolls();
+
+// there may be a better way to implement this instead of using baseStat
+let baseStatNumbers = [strMod, dexMod, conMod, intMod, wisMod, chaMod] = [startingRolls[0], startingRolls[1], startingRolls[2], startingRolls[3], startingRolls[4], startingRolls[5]];
+
+// this function runs on page load, rolls for random stats and adds them to the stat section
+(() => {
+    for (let i = 0; i < startingRolls.length; i++) {
+        console.log(statNumbersFromHTML[i].innerHTML = baseStatNumbers[i]);
+        statModifiersFromHTML[i].innerHTML = Math.floor((statNumbersFromHTML[i].innerHTML - 10) / 2);
+    }
+    addPlusOrMinus(statModifiersFromHTML);
+})();
+
 // running searchForKey will return an array of each value for the chosen object key argument in the choses list of objects
 function searchForKey(list, specificKey) {
     let valueArray = [];
@@ -346,46 +378,12 @@ function statRolls() {
     return statRollsArray;
 };
 
-let startingRolls = statRolls();
-
-
-
-
 
 
 // BELOW IS A WORKING NUMBER MODIFIER FOR STATS
 // SOME OF THIS CODE WAS TAKEN, POTENTIALLY MODIFIED, BUT NOT REMOVED, FROM THE SECTION FURTHER BELOW
 
 // REWORK FOR TOUCH. MAYBE ADD BUTTON INSTEAD OF ENTER?
-
-let strengthNumber = document.getElementById(`strengthNumber`);
-let strengthNumberInput = document.getElementById(`strengthNumberInput`);
-let dexterityNumber = document.getElementById(`dexterityNumber`);
-let dexterityNumberInput = document.getElementById(`dexterityNumberInput`);
-let constitutionNumber = document.getElementById(`constitutionNumber`);
-let constitutionNumberInput = document.getElementById(`constitutionNumberInput`);
-let intelligenceNumber = document.getElementById(`intelligenceNumber`);
-let intelligenceNumberInput = document.getElementById(`intelligenceNumberInput`);
-let wisdomNumber = document.getElementById(`wisdomNumber`);
-let wisdomNumberInput = document.getElementById(`wisdomNumberInput`);
-let charismaNumber = document.getElementById(`charismaNumber`);
-let charismaNumberInput = document.getElementById(`charismaNumberInput`);
-
-let statNumbersFromHTML = document.querySelectorAll(`.statNum`);
-let statModifiersFromHTML = document.querySelectorAll('.statMod');
-let statNumbersArray = [strengthNumber, dexterityNumber, constitutionNumber, intelligenceNumber, wisdomNumber, charismaNumber];
-let statNumberInputs = [strengthNumberInput, dexterityNumberInput, constitutionNumberInput, intelligenceNumberInput, wisdomNumberInput, charismaNumberInput];
-
-// there may be a better way to implement this instead of using baseStatNumbers
-let baseStatNumbers = [strMod, dexMod, conMod, intMod, wisMod, chaMod] = [startingRolls[0], startingRolls[1], startingRolls[2], startingRolls[3], startingRolls[4], startingRolls[5]];
-
-(() => {
-    for (let i = 0; i < startingRolls.length; i++) {
-        console.log(statNumbersFromHTML[i].innerHTML = baseStatNumbers[i]);
-        statModifiersFromHTML[i].innerHTML = Math.floor((statNumbersFromHTML[i].innerHTML - 10) / 2);
-    }
-    addPlusOrMinus(statModifiersFromHTML);
-})();
 
 function addPlusOrMinus(number) {
     for (i = 0; i < number.length; i++) {
@@ -420,6 +418,10 @@ document.onkeydown = function confirmStatNumber(event) {
 };
 
 
+// FOR OF LOOP TEST -- POSSIBLY REWRITE MUCH OF CODE TO UTILIZE
+for (number of statModifiersFromHTML) {
+    console.log(number.innerHTML)
+}
 
 
 
@@ -441,10 +443,6 @@ let classSelection;
 let level = 1;
 let proficiency = Math.ceil(1 + level / 4);
 console.log(proficiency);
-
-let saves = [str, dex, con, int, wis, cha] = ['Strength','Dexterity','Constitution','Intelligence','Wisdom','Charisma'];
-
-let baseStatMods = [strMod, dexMod, conMod, intMod, wisMod, chaMod] = [0, 0, 0, 0, 0, 0];
 
 
 // let statNum = document.querySelectorAll('.statNum');
@@ -468,18 +466,6 @@ function reset() {
     }
     for (i = 0; i < saveNum.length; i++){
         saveNum[i].innerHTML = baseStatMods[i];
-    }
-}
-
-function plusMinus(number) {
-    for (i = 0; i < number.length; i++) {
-        if (Math.sign(number[i].innerHTML) == 1) {
-            number[i].innerHTML = `+ ${number[i].innerHTML}`;
-        } else if (Math.sign(number[i].innerHTML) == -1) {
-            number[i].innerHTML = `- ${number[i].innerHTML * -1}`;
-        } else {
-            number[i].innerHTML = 0;
-        }
     }
 }
 
