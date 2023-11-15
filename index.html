@@ -16,28 +16,69 @@
 </head>
 <body>
 
-    <form>
-        <label for="chooseClass">
-            CLASS
-        <select name="chooseClass" id="chooseClass" onchange="addSaves()">
-            <option value="choose">Select One</option>
-            <option value="Artificer">Artificer</option>
-            <option value="Barbarian">Barbarian</option>
-            <option value="Bard">Bard</option>
-            <option value="Cleric">Cleric</option>
-            <option value="Druid">Druid</option>
-            <option value="Fighter">Fighter</option>
-            <option value="Monk">Monk</option>
-            <option value="Paladin">Paladin</option>
-            <option value="Ranger">Ranger</option>
-            <option value="Rogue">Rogue</option>
-            <option value="Sorcerer">Sorcerer</option>
-            <option value="Warlock">Warlock</option>
-            <option value="Wizard">Wizard</option>
-        </select>
-        </label>
-    </form>
     <div class="charSheet">
+        <div id="formWrapper">
+
+            <form class="options">
+                <label for="chooseClass">CLASS:</label>
+                <select name="chooseClass" id="chooseClass" onchange="addClassSelection()">
+                    <option value="chooseClass">Select One</option>
+                    <option value="Artificer">Artificer</option>
+                    <option value="Barbarian">Barbarian</option>
+                    <option value="Bard">Bard</option>
+                    <option value="Cleric">Cleric</option>
+                    <option value="Druid">Druid</option>
+                    <option value="Fighter">Fighter</option>
+                    <option value="Monk">Monk</option>
+                    <option value="Paladin">Paladin</option>
+                    <option value="Ranger">Ranger</option>
+                    <option value="Rogue">Rogue</option>
+                    <option value="Sorcerer">Sorcerer</option>
+                    <option value="Warlock">Warlock</option>
+                    <option value="Wizard">Wizard</option>
+                </select>
+            </form>
+            <form class="options">
+                <label for="chooseRace">RACE:</label>
+                <select name="chooseRace" id="chooseRace" onchange="addRaceSelection()">
+                    <option value="chooseRace">Select One</option>
+                    <option value="Dragonborn">Dragonborn</option>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Gnome">Gnome</option>
+                    <option value="Half-Elf">Half-Elf</option>
+                    <option value="Half-Orc">Half-Orc</option>
+                    <option value="Halfling">Halfling</option>
+                    <option value="Human">Human</option>
+                    <option value="Tiefling">Tiefling</option>
+                </select>
+            </form>
+            <form class="options">
+                <label for="chooseBackground">BACKGROUND:</label>
+                <select name="chooseBackground" id="chooseBackground" onchange="addBackgroundSelection()">
+                    <option value="chooseBackground">Select One</option>
+                    <option value="Acolyte">Acolyte</option>
+                    <option value="Charlatan">Charlatan</option>
+                    <option value="Criminal">Criminal</option>
+                    <option value="Entertainer">Entertainer</option>
+                    <option value="FolkHero">Folk Hero</option>
+                    <option value="Gladiator">Gladiator</option>
+                    <option value="Guild Artisan">Guild Artisan</option>
+                    <option value="Guild Merchant">Guild Merchant</option>
+                    <option value="Hermit">Hermit</option>
+                    <option value="Knight">Knight</option>
+                    <option value="Noble">Noble</option>
+                    <option value="Outlander">Outlander</option>
+                    <option value="Pirate">Pirate</option>
+                    <option value="Sage">Sage</option>
+                    <option value="Sailor">Sailor</option>
+                    <option value="Soldier">Soldier</option>
+                    <option value="Spy">Spy</option>
+                    <option value="Urchin">Urchin</option>
+                </select>
+            </form>
+
+        </div>
         <div class="header">
             <div class="name"></div>
             <div class="info"></div>
@@ -95,7 +136,7 @@
                     <div class="saveLine">
                         <div class="dot saveDot saveItem"></div>
                         <div class="num saveNum saveItem">-</div>
-                        <div class="save strSave saveItem" onclick="check()">Strength</div>
+                        <div class="save strSave saveItem">Strength</div>
                     </div>
                     <div class="saveLine">
                         <div class="dot saveDot saveItem"></div>
